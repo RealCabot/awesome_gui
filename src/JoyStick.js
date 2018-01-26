@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import nipplejs from 'nipplejs';
-import ROSLIB from 'roslib';
+import sender from './sender.js'
 
 const SPEED_LIMIT = 0.7;
 
@@ -15,45 +15,16 @@ class JoyStick extends Component {
         this.state = {
             ros: this.props.ros
         }
-        this.cmdTopic = new ROSLIB.Topic({
-            ros : this.state.ros,
-            name : '/cmd_vel',
-            messageType : 'geometry_msgs/Twist'
-          });
     }
     componentDidMount(){
         this.manager.on('move', (e, stick)=>{
             // Set the maximum force to be 2
             const speed = Math.min(stick.force, 2) / 2 * SPEED_LIMIT;
             const angle = stick.angle.radian;
-            const twist = new ROSLIB.Message({
-                linear : {
-                  x : speed,
-                  y : 0,
-                  z : 0
-                },
-                angular : {
-                  x : 0,
-                  y : 0,
-                  z : angle - Math.PI /2
-                }
-              });
-              this.cmdTopic.publish(twist);
+            sender.sendCmd(speed, angle - Math.PI /2);
         })
         this.manager.on('end', ()=>{
-            const twist = new ROSLIB.Message({
-                linear : {
-                  x : 0,
-                  y : 0,
-                  z : 0
-                },
-                angular : {
-                  x : 0,
-                  y : 0,
-                  z : 0
-                }
-              });
-            this.cmdTopic.publish(twist);
+            sender.sendCmd(0, 0);
         })
     }
     render(){
