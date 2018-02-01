@@ -13,6 +13,11 @@ You also need to install locally the dependency for this specific application, r
 yarn
 ```
 ### How to run this
+First run the one-for-all script to do everything else
+```
+roslaunch localizer move_base.launch
+```
+Then run this to opoen the browser and play with it
 ```
 yarn start
 ```
