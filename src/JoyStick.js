@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import nipplejs from 'nipplejs';
-import sender from './sender.js'
+import sender from './sender.js';
+import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
+import { withStyles } from 'material-ui/styles';
 
 const SPEED_LIMIT = 0.7;
+
+const styles = theme => ({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    root: theme.mixins.gutters({
+        paddingTop: 16,
+        paddingBottom: 16,
+        marginTop: theme.spacing.unit * 3,
+      })
+  });
 
 class JoyStick extends Component {
     constructor(props) {
@@ -28,11 +43,13 @@ class JoyStick extends Component {
         })
     }
     render(){
+        const { classes } = this.props;
         const divStyle = {
             position: 'relative',
-            height:'400px',
+            height:'200px',
             width:'100%',
-            backgroundColor:'#d2d2d2'
+            background: 'linear-gradient(to right, #E684AE, #79CBCA, #77A1D3)' /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
         }
         var renderJoy = function(element){
             const combinedOptions = Object.assign({zone: element}, this.joyOptions)
@@ -40,8 +57,15 @@ class JoyStick extends Component {
         }
         renderJoy = renderJoy.bind(this);
 
-        return <div ref={renderJoy} style={divStyle}></div>
+        return (
+        <Grid item xs={12} sm={4} className={classes.root}>
+            <Paper elevation={4} className={classes.paper}>
+                <div ref={renderJoy} style={divStyle}>
+                </div>
+            </Paper>
+        </Grid>
+        )
     }
 }
 
-export default JoyStick;
+export default withStyles(styles)(JoyStick);

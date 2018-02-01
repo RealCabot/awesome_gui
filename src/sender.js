@@ -1,4 +1,5 @@
 import ROSLIB from 'roslib'
+import Quaternion from 'quaternion'
 
 class Sender {
     constructor(){
@@ -22,7 +23,13 @@ class Sender {
             name : '/cmd_vel',
             messageType : 'geometry_msgs/Twist'
           });
+        this.moveBaseClient = new ROSLIB.ActionClient({
+            ros : this.ros,
+            serverName : '/move_base',
+            actionName : 'move_base_msgs/MoveBaseAction'
+          });
     }
+
     sendCmd(speed, angle){
         const twist = new ROSLIB.Message({
             linear : {
@@ -37,6 +44,54 @@ class Sender {
             }
           });
           this.cmdTopic.publish(twist);
+    }
+
+    sendGoal(x, y, angle){
+
+        var currentTime = new Date();
+        var secs = Math.floor(currentTime.getTime()/1000);
+        var nsecs = Math.round(1000000000*(currentTime.getTime()/1000-secs));
+
+        const q = Quaternion.fromEuler(angle, 0, 0, 'ZXY');
+        const q_vec = q.toVector();
+
+        const goal = new ROSLIB.Goal({
+            actionClient : this.moveBaseClient,
+            goalMessage : {
+                target_pose : {
+                    header: {
+                        frame_id: "base_link",
+                        stamp: {
+                            secs: secs,
+                            nsecs: nsecs
+                        }
+                    },
+                    pose: {
+                        position: {
+                            x: x,
+                            y: y,
+                            z: 0
+                        },
+                        orientation: {
+                            x: q_vec[1],
+                            y: q_vec[2],
+                            z: q_vec[3],
+                            w: q_vec[0]
+                        }
+                    }
+                }
+            }
+          });
+
+          goal.on('feedback', function(feedback) {
+            console.log('Feedback: ' + feedback.sequence);
+          });
+        
+          goal.on('result', function(result) {
+            console.log('Final Result: ' + result.sequence);
+          });
+        
+          goal.send();
     }
 }
 
