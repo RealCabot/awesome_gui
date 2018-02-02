@@ -5,7 +5,7 @@ import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
 
-const SPEED_LIMIT = 0.7;
+const SPEED_LIMIT = 0.5;
 
 const styles = theme => ({
     container: {
@@ -34,7 +34,7 @@ class JoyStick extends Component {
     componentDidMount(){
         this.manager.on('move', (e, stick)=>{
             // Set the maximum force to be 2
-            const speed = Math.min(stick.force, 2) / 2 * SPEED_LIMIT;
+            const speed = Math.min(stick.force, 4) / 4 * SPEED_LIMIT;
             const angle = stick.angle.radian;
             sender.sendCmd(speed, angle - Math.PI /2);
         })
