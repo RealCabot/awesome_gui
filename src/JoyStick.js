@@ -36,7 +36,7 @@ class JoyStick extends Component {
             // Set the maximum force to be 2
             const speed = Math.min(stick.force, 4) / 4 * SPEED_LIMIT;
             const angle = stick.angle.radian;
-            sender.sendCmd(speed, angle - Math.PI /2);
+            sender.sendCmd(speed, (angle - Math.PI /2)/3);
         })
         this.manager.on('end', ()=>{
             sender.sendCmd(0, 0);

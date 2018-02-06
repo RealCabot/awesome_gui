@@ -62,7 +62,7 @@ class DirectSpeed extends Component {
                             <Grid item xs={12}>
                                 <TextField
                                     name="speed"
-                                    label="Speed"
+                                    label="Linear Speed"
                                     value={this.state.speed}
                                     onChange={this.handleInputChange}
                                     margin="normal"
@@ -72,7 +72,7 @@ class DirectSpeed extends Component {
                             <Grid item xs={12}>
                                 <TextField
                                     name="angle"
-                                    label="Angle"
+                                    label="Anglar Speed"
                                     value={this.state.angle}
                                     onChange={this.handleInputChange}
                                     margin="normal"
