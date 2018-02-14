@@ -28,7 +28,7 @@ class DirectSpeed extends Component {
         super(props);
         this.state = {
             speed: '',
-            angle: ''
+            angular: ''
         };
         // This binding is necessary to make `this` work in the callback
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -46,7 +46,7 @@ class DirectSpeed extends Component {
     }
 
     handleSend(){
-        sender.sendCmd(parseFloat(this.state.speed), parseFloat(this.state.angle)/180*Math.PI);
+        sender.sendCmd(parseFloat(this.state.speed), parseFloat(this.state.angular));
     }
 
     render() {
@@ -71,9 +71,9 @@ class DirectSpeed extends Component {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
-                                    name="angle"
-                                    label="Anglar Speed"
-                                    value={this.state.angle}
+                                    name="angular"
+                                    label="Anglar Speed (in degree)"
+                                    value={this.state.angular}
                                     onChange={this.handleInputChange}
                                     margin="normal"
                                     className={classes.textField}

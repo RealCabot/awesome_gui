@@ -8,7 +8,7 @@ echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/source
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 sudo apt-get update && sudo apt-get install nodejs yarn
 ```
-You also need to install locally the dependency for this specific application, run
+You also need to install locally the dependency for this specific application, run in the folder
 ```
 yarn
 ```

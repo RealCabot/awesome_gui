@@ -4,7 +4,9 @@ import Quaternion from 'quaternion'
 class Sender {
     constructor(){
         this.ros = new ROSLIB.Ros({
-            url : 'ws://192.168.1.109:9090'
+            // in order to use it in your phone
+            // url : 'ws://192.168.1.109:9090'
+            url : 'ws://localhost:9090'
         });
         
         this.ros.on('connection', function() {
