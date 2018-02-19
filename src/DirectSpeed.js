@@ -28,7 +28,8 @@ class DirectSpeed extends Component {
         super(props);
         this.state = {
             speed: '',
-            angular: ''
+            angular: '',
+            latch: ''
         };
         // This binding is necessary to make `this` work in the callback
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -47,6 +48,9 @@ class DirectSpeed extends Component {
 
     handleSend(){
         sender.sendCmd(parseFloat(this.state.speed), parseFloat(this.state.angular));
+        setTimeout(()=>{
+            sender.sendCmd(0,0);
+        }, parseFloat(this.state.latch)*1000)
     }
 
     render() {
@@ -62,7 +66,7 @@ class DirectSpeed extends Component {
                             <Grid item xs={12}>
                                 <TextField
                                     name="speed"
-                                    label="Linear Speed"
+                                    label="Linear Velocity"
                                     value={this.state.speed}
                                     onChange={this.handleInputChange}
                                     margin="normal"
@@ -72,8 +76,18 @@ class DirectSpeed extends Component {
                             <Grid item xs={12}>
                                 <TextField
                                     name="angular"
-                                    label="Anglar Speed (in degree)"
+                                    label="Anglar Velocity"
                                     value={this.state.angular}
+                                    onChange={this.handleInputChange}
+                                    margin="normal"
+                                    className={classes.textField}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    name="latch"
+                                    label="Latch"
+                                    value={this.state.latch}
                                     onChange={this.handleInputChange}
                                     margin="normal"
                                     className={classes.textField}
