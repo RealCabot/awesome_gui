@@ -13,11 +13,21 @@ You also need to install locally the dependency for this specific application, r
 yarn
 ```
 ### How to run this
+
+#### If you just want to teleoping Cabot
+
+- Connect your laptop with Arduino on Cabot
+- Make sure laptop and remote control device are in the same network (Cabot or phone hotspot)
+- run `roslaunch localizer get_odom.launch` anywhere and run `yarn start` in this folder
+- Go to your remote control device, open the browser, in the address bar, enter the ip address:3000 as is shown in the `yarn start` window
+
+
+#### If you want to do all the things
 First run the one-for-all script to do everything else
 ```
 roslaunch localizer move_base.launch
 ```
-Then run this to opoen the browser and play with it
+Then run this to open the browser and play with it
 ```
 yarn start
 ```
