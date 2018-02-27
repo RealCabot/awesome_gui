@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import nipplejs from 'nipplejs';
 import sender from './sender.js';
-import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
 
@@ -46,10 +45,9 @@ class JoyStick extends Component {
         const { classes } = this.props;
         const divStyle = {
             position: 'relative',
-            height:'200px',
+            height:'100vh',
             width:'100%',
             background: 'linear-gradient(to right, #E684AE, #79CBCA, #77A1D3)' /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
         }
         var renderJoy = function(element){
             const combinedOptions = Object.assign({zone: element}, this.joyOptions)
@@ -58,12 +56,10 @@ class JoyStick extends Component {
         renderJoy = renderJoy.bind(this);
 
         return (
-        <Grid item xs={12} sm={4} className={classes.root}>
             <Paper elevation={4} className={classes.paper}>
                 <div ref={renderJoy} style={divStyle}>
                 </div>
             </Paper>
-        </Grid>
         )
     }
 }
