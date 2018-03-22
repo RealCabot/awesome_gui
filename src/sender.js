@@ -1,8 +1,8 @@
 import ROSLIB from 'roslib'
 import Quaternion from 'quaternion'
 
-const ROS_BRIDGE_URL = 'ws://192.168.1.109:9090'
-// const ROS_BRIDGE_URL = 'ws://localhost:9090'
+// const ROS_BRIDGE_URL = 'ws://192.168.1.109:9090'
+const ROS_BRIDGE_URL = 'ws://localhost:9090'
 
 class Sender {
     constructor(){
@@ -33,6 +33,16 @@ class Sender {
             serverName : '/move_base',
             actionName : 'move_base_msgs/MoveBaseAction'
           });
+        this.pidLTopic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: '/tunePID_L',
+            messageType: 'geometry_msgs/Vector3'
+        })
+        this.pidRTopic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: '/tunePID_R',
+            messageType: 'geometry_msgs/Vector3'
+        })
     }
 
     sendCmd(speed, angle){
@@ -49,6 +59,21 @@ class Sender {
             }
           });
           this.cmdTopic.publish(twist);
+    }
+
+    sendPID(kp_L, ki_L, kd_L, kp_R, ki_R, kd_R){
+        const params_L = new ROSLIB.Message({
+            x: kp_L,
+            y: ki_L,
+            z: kd_L
+        });
+        const params_R = new ROSLIB.Message({
+            x: kp_R,
+            y: ki_R,
+            z: kd_R
+        });
+        this.pidLTopic.publish(params_L);
+        this.pidRTopic.publish(params_R);
     }
 
     sendGoal(x, y, angle){

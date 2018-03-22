@@ -5,6 +5,7 @@ import './App.css';
 import JoyStick from './JoyStick'
 import DirectSpeed from './DirectSpeed';
 import CommandCenter from './CommandCenter';
+import TunePID from './TunePID';
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
         <DirectSpeed></DirectSpeed>
         <CommandCenter></CommandCenter>
         <JoyStick></JoyStick>
+        <TunePID></TunePID> 
         </Grid>
       </div>
     );
