@@ -5,10 +5,13 @@
   "dependencies": {
     "eventemitter2": "^5.0.1",
     "material-ui": "next",
+    "material-ui-icons": "^1.0.0-beta.36",
     "nipplejs": "^0.6.8",
+    "prop-types": "^15.6.1",
     "quaternion": "^2.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-joystick": "^0.2.0",
     "react-scripts": "1.0.14",
     "roslib": "^0.20.0"
   },
