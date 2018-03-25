@@ -6,6 +6,7 @@ import DirectSpeed from './DirectSpeed';
 import CommandCenter from './CommandCenter';
 import TunePID from './TunePID';
 import JoyWrapper from './JoyWrapper';
+import DestinationSelector from './DestinationSelector'
 
 class App extends Component {
   render() {
@@ -19,7 +20,8 @@ class App extends Component {
         <DirectSpeed></DirectSpeed>
         <CommandCenter></CommandCenter>
         <JoyWrapper></JoyWrapper>
-        <TunePID></TunePID> 
+        <TunePID></TunePID>
+        <DestinationSelector></DestinationSelector>
         </Grid>
       </div>
     );

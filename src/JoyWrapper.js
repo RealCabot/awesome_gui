@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import JoyStick from './JoyStick';
+import JoyStick from 'react-joystick';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
