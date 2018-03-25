@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import logo from './img/motor.svg';
 import './App.css';
-import JoyStick from './JoyStick'
 import DirectSpeed from './DirectSpeed';
 import CommandCenter from './CommandCenter';
 import TunePID from './TunePID';
+import JoyWrapper from './JoyWrapper';
 
 class App extends Component {
   render() {
@@ -18,7 +18,7 @@ class App extends Component {
         <Grid container spacing={24} justify="center">
         <DirectSpeed></DirectSpeed>
         <CommandCenter></CommandCenter>
-        <JoyStick></JoyStick>
+        <JoyWrapper></JoyWrapper>
         <TunePID></TunePID> 
         </Grid>
       </div>
