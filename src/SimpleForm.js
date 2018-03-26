@@ -52,16 +52,16 @@ class SimpleForm extends Component {
     render() {
         const { classes } = this.props;
         const textFields = this.props.fields.map(f =>
-            <Grid item xs={12}>
-            <TextField
-                name={f.name}
-                label={f.label}
-                value={this.state[f.name]}
-                onChange={this.handleInputChange}
-                margin="normal"
-                className={classes.textField}
-            />
-        </Grid>
+            <Grid item xs={12} key={f.name}>
+                <TextField
+                    name={f.name}
+                    label={f.label}
+                    value={this.state[f.name]}
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                    className={classes.textField}
+                />
+            </Grid>
         );
         return(
             <Grid item xs={12} sm={4} className={classes.root}>
