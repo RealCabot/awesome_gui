@@ -14,8 +14,6 @@ const interpolateSpectral = d3ScaleChromatic.interpolateSpectral
 const CROSS_CIRCLE_THRESHOLD = 2 * Math.PI - 1;
 const DESTINATIONS_GAP_ANGLE = Math.PI / 3;
 
-const synth = window.speechSynthesis;
-
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -47,7 +45,7 @@ class DestinationSelector extends Component {
                 position: 'relative',
                 height: '350px',
                 width: '100%',
-                background: interpolateSpectral(0).toString() /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                background: interpolateSpectral(0).toString()
             }
         }
     }
@@ -84,24 +82,24 @@ class DestinationSelector extends Component {
                 }
             }
             const real_angle = this.accumulated_round * 2 * Math.PI + angle;
-            console.log(real_angle);
             const index = this.angleToIndex(real_angle);
             this.setState({
                 divStyle: Object.assign({}, this.state.divStyle, {background: interpolateSpectral(this.angleToPercent(real_angle)).toString()}) 
             })
             if (index !== this.prev_index){
-                console.log(index, destinations[index]);
-                responsiveVoice.speak(destinations[index]);
+                responsiveVoice.speak(destinations[index].name);
                 this.setState({
-                    destination: destinations[index],
+                    destination: destinations[index].name,
                 })
             }
             this.prev_index = index
             this.prev_angle = angle;
-            
         })
         manager.on('end', () => {
             this.accumulated_round = 0;
+            const selected_dest = destinations[this.prev_index]
+            responsiveVoice.speak("Navigating to " + selected_dest.name);
+            sender.sendGoal(selected_dest.coordinates[0], selected_dest.coordinates[1], 0) //TODO: make the angle not default to 0
         })
     }
 

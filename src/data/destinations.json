@@ -1,6 +1,9 @@
 [
-    "Restroom for man",
-    "Restroom for woman",
-    "4401 NSH building",
-    "Yanda's office"
+    { "name": "4524 NSH Building, Cabot Lab", "coordinates": [0, 0] },
+    { "name": "4527 NSH Building", "coordinates": [2.18, 0.156] },
+    { "name": "4522 NSH Building, Dragan and Ashi's Room", "coordinates": [4.22, -0.8] },
+    { "name": "4519 NSH Building, Tatsuya's Room", "coordinates": [11, -0.9] },
+    { "name": "Random small fridge", "coordinates": [10, -3.7] },
+    { "name": "Back door to Personal Robotics Lab", "coordinates": [-2, -8] },
+    { "name": "Robo lounge", "coordinates": [-0.85, -22.9] }
 ]

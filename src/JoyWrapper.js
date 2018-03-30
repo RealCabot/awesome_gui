@@ -43,7 +43,6 @@ class JoyWrapper extends Component {
             // Set the maximum force to be 2
             const speed = Math.min(stick.force, 4) / 4 * SPEED_LIMIT;
             const angle = stick.angle.radian;
-            console.log(angle)
             sender.sendCmd(speed, (angle - Math.PI / 2) / 3);
         })
         manager.on('end', () => {

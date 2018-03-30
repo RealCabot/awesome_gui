@@ -1,5 +1,6 @@
 import ROSLIB from 'roslib'
 import Quaternion from 'quaternion'
+import responsiveVoice from './vendor/responsiveVoice'
 
 // const ROS_BRIDGE_URL = 'ws://192.168.1.109:9090'
 const ROS_BRIDGE_URL = 'ws://localhost:9090'
@@ -112,13 +113,9 @@ class Sender {
                 }
             }
           });
-
-          goal.on('feedback', function(feedback) {
-            console.log('Feedback: ' + feedback.sequence);
-          });
         
           goal.on('result', function(result) {
-            console.log('Final Result: ' + result.sequence);
+            responsiveVoice.speak("Congratulations! You reached your destination");
           });
         
           goal.send();
