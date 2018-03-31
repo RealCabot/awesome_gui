@@ -81,10 +81,12 @@ function goal_handleSend(state){
 }
 
 function directSpeed_handleSend(state){
-    sender.sendCmd(parseFloat(state.speed), parseFloat(state.angular));
-    setTimeout(()=>{
-        sender.sendCmd(0,0);
-    }, parseFloat(state.latch)*1000)
+    sender.sendCmd(parseFloat(state.linear), parseFloat(state.angular));
+    if (state.latch){
+        setTimeout(()=>{
+            sender.sendCmd(0,0);
+        }, parseFloat(state.latch)*1000)
+    }
 }
 
 function pid_handleSend(state){
