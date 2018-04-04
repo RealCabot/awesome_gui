@@ -59,6 +59,7 @@ class Sender {
     }
 
     sendCmd(speed, angle){
+        console.log(speed)
         const twist = new ROSLIB.Message({
             linear : {
               x : speed,
