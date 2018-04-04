@@ -24,26 +24,38 @@ class Sender {
         this.ros.on('close', function() {
             console.log('Connection to websocket server closed.');
         });
+
         this.cmdTopic = new ROSLIB.Topic({
             ros : this.ros,
             name : '/cmd_vel',
             messageType : 'geometry_msgs/Twist'
           });
+
         this.moveBaseClient = new ROSLIB.ActionClient({
             ros : this.ros,
             serverName : '/move_base',
             actionName : 'move_base_msgs/MoveBaseAction'
           });
+
         this.pidLTopic = new ROSLIB.Topic({
             ros: this.ros,
             name: '/tunePID_L',
             messageType: 'geometry_msgs/Vector3'
         })
+
         this.pidRTopic = new ROSLIB.Topic({
             ros: this.ros,
             name: '/tunePID_R',
             messageType: 'geometry_msgs/Vector3'
         })
+
+        this.sayTopic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: '/say',
+            messageType: 'std_msgs/String'
+        })
+
+        this.sayTopic.subscribe(sentence => responsiveVoice.speak(sentence.data))
     }
 
     sendCmd(speed, angle){
@@ -120,6 +132,8 @@ class Sender {
         
           goal.send();
     }
+
+    
 }
 
 const sender = new Sender();
