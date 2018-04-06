@@ -27,7 +27,7 @@ const styles = theme => ({
 });
 
 const joyOptions = {
-    mode: 'semi',
+    mode: 'dynamic',
     catchDistance: 150,
     color: 'white'
 }

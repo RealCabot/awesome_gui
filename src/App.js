@@ -35,7 +35,7 @@ class App extends Component {
       <div className="App">
         <div className={classes.navbar}>
           <AppBar position="static">
-            <Tabs value={value} onChange={this.handleChange}>
+            <Tabs value={value} onChange={this.handleChange} centered>
               <Tab label="Commander" value="commander" icon={<ChatIcon />} />
               <Tab label="Joystick" value="joystick" icon={<OpenWithIcon />} />
               <Tab label="Destination" value="destination" icon={<LocationOnIcon />} />
