@@ -3,6 +3,8 @@ import JoyStick from 'react-joystick';
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
+import Button from 'material-ui/Button';
+import AddIcon from 'material-ui-icons/Add';
 import sender from './sender.js';
 
 const styles = theme => ({
@@ -14,7 +16,10 @@ const styles = theme => ({
         paddingTop: 16,
         paddingBottom: 16,
         marginTop: theme.spacing.unit * 3,
-    })
+    }),
+    button: {
+        margin: theme.spacing.unit,
+    }
 });
 
 const joyOptions = {
@@ -35,7 +40,11 @@ const SPEED_LIMIT = 0.5;
 class JoyWrapper extends Component {
     constructor() {
         super();
+        this.state = {
+            stamp: ''
+        }
         this.managerFn = this.managerFn.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     managerFn(manager) {
@@ -50,14 +59,26 @@ class JoyWrapper extends Component {
         })
     }
 
+    handleClick() {
+        const currentTime = new Date();
+        this.setState({stamp: currentTime.getTime()})
+        sender.sendTime()
+    }
+
     render() {
         const { classes } = this.props;
         return (
-            <Grid item xs={12} sm={4} className={classes.root}>
-                <Paper elevation={4} className={classes.paper}>
-                    <JoyStick joyOptions={joyOptions} divStyle={divStyle} managerFn={this.managerFn} />
-                </Paper>
-            </Grid>
+            <div>
+                <Grid item xs={12} sm={4} className={classes.root}>
+                    <Paper elevation={4} className={classes.paper}>
+                        <JoyStick joyOptions={joyOptions} divStyle={divStyle} managerFn={this.managerFn} />
+                    </Paper>
+                </Grid>
+                <Button fab color="primary" aria-label="add" onClick={this.handleClick} className={classes.button} >
+                    <AddIcon />
+                </Button>
+                <p>{this.state.stamp}</p>
+            </div>
         )
     }
 }

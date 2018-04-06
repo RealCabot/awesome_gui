@@ -55,6 +55,13 @@ class Sender {
             messageType: 'std_msgs/String'
         })
 
+        this.collideTopic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: '/collide',
+            messageType: 'std_msgs/Time'
+        })
+
+
         this.sayTopic.subscribe(sentence => responsiveVoice.speak(sentence.data))
     }
 
@@ -88,6 +95,19 @@ class Sender {
         });
         this.pidLTopic.publish(params_L);
         this.pidRTopic.publish(params_R);
+    }
+
+    sendTime(){
+        var currentTime = new Date();
+        var secs = Math.floor(currentTime.getTime()/1000);
+        var nsecs = Math.round(1000000000*(currentTime.getTime()/1000-secs));
+        const collideMsg = new ROSLIB.Message({
+            data: {
+                secs: secs,
+                nsecs: nsecs
+            }
+        })
+        this.collideTopic.publish(collideMsg)
     }
 
     sendGoal(x, y, angle){
