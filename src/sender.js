@@ -49,6 +49,12 @@ class Sender {
             messageType: 'geometry_msgs/Vector3'
         })
 
+        this.resetArduinoTopic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: '/reset_arduino',
+            messageType: 'std_msgs/Bool'
+        })
+
         this.sayTopic = new ROSLIB.Topic({
             ros: this.ros,
             name: '/say',
@@ -132,6 +138,12 @@ class Sender {
           });
         
           goal.send();
+    }
+
+    resetArduino(){
+        this.resetArduinoTopic.publish(new ROSLIB.Message({
+            data: true
+        }))
     }
 
     

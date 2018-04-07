@@ -73,7 +73,7 @@ class SimpleForm extends Component {
                         <Grid container spacing={8}>
                             {textFields}
                             <Grid item xs={12}>
-                                <Button raised color="primary" onClick={this.handleSend}>Go!</Button>
+                                <Button variant="raised" color="primary" onClick={this.handleSend}>Go!</Button>
                             </Grid>
                         </Grid>
                     </form> 

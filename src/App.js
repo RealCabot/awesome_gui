@@ -8,11 +8,18 @@ import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';import ChatIcon from 'material-ui-icons/Chat';
 import OpenWithIcon from 'material-ui-icons/OpenWith';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
+import Button from 'material-ui/Button';
+import sender from './sender.js';
 
 const styles = theme => ({
   navbar: {
     flexGrow: 1
   },
+  reset: {
+    position: 'fixed',
+    bottom: '1rem',
+    right:'calc(50% - 56px)'
+  }
 });
 
 class App extends Component {
@@ -21,12 +28,17 @@ class App extends Component {
     this.state = {
       value: 'commander',
     };
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
+    this.resetArduino = this.resetArduino.bind(this);
   }
 
   handleChange(event, value){
     this.setState({ value });
   };
+
+  resetArduino(){
+    sender.resetArduino();
+  }
 
   render() {
     const { classes } = this.props;
@@ -45,6 +57,9 @@ class App extends Component {
         {value === 'commander' && <CommandCenter/>}
         {value === 'joystick' && <JoyWrapper/>}
         {value === 'destination' && <DestinationSelector/>}
+        <Button variant="fab" color="secondary" aria-label="reset" size='large' className={classes.reset} onClick={this.resetArduino}>
+          Do not press
+        </Button>
       </div>
     );
   }
