@@ -66,7 +66,7 @@ class SimpleForm extends Component {
         return(
             <Grid item xs={12} sm={4} className={classes.root}>
                 <Paper elevation={4} className={classes.paper}>
-                    <Typography type="headline" component="h3">
+                    <Typography variant="headline" component="h3">
                         {this.props.title}
                     </Typography>
                     <form>

@@ -10,6 +10,25 @@ import OpenWithIcon from 'material-ui-icons/OpenWith';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
 import Button from 'material-ui/Button';
 import sender from './sender.js';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#6effff',
+      main: '#00e5ff',
+      dark: '#00b2cc',
+      contrastText: '#37474f',
+    },
+    secondary: {
+      light: '#fff64f',
+      main: '#ffc400',
+      dark: '#c79400',
+      contrastText: '#f9f9f9',
+    },
+  },
+});
+
 
 const styles = theme => ({
   navbar: {
@@ -44,23 +63,25 @@ class App extends Component {
     const { classes } = this.props;
     const { value } = this.state;
     return (
-      <div className="App">
-        <div className={classes.navbar}>
-          <AppBar position="static">
-            <Tabs value={value} onChange={this.handleChange} centered>
-              <Tab label="Commander" value="commander" icon={<ChatIcon />} />
-              <Tab label="Joystick" value="joystick" icon={<OpenWithIcon />} />
-              <Tab label="Destination" value="destination" icon={<LocationOnIcon />} />
-            </Tabs>
-          </AppBar>
+      <MuiThemeProvider theme={theme}>
+        <div className="App">
+          <div className={classes.navbar}>
+            <AppBar position="static">
+              <Tabs value={value} onChange={this.handleChange} centered>
+                <Tab label="Commander" value="commander" icon={<ChatIcon />} />
+                <Tab label="Joystick" value="joystick" icon={<OpenWithIcon />} />
+                <Tab label="Destination" value="destination" icon={<LocationOnIcon />} />
+              </Tabs>
+            </AppBar>
+          </div>
+          {value === 'commander' && <CommandCenter/>}
+          {value === 'joystick' && <JoyWrapper/>}
+          {value === 'destination' && <DestinationSelector/>}
+          <Button variant="fab" color="secondary" aria-label="reset" size='large' className={classes.reset} onClick={this.reset}>
+            Do not press
+          </Button>
         </div>
-        {value === 'commander' && <CommandCenter/>}
-        {value === 'joystick' && <JoyWrapper/>}
-        {value === 'destination' && <DestinationSelector/>}
-        <Button variant="fab" color="secondary" aria-label="reset" size='large' className={classes.reset} onClick={this.reset}>
-          Do not press
-        </Button>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
