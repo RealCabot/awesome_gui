@@ -2,66 +2,65 @@ import ROSLIB from 'roslib'
 import Quaternion from 'quaternion'
 import responsiveVoice from './vendor/responsiveVoice'
 
-// const ROS_BRIDGE_URL = 'ws://192.168.1.109:9090'
-const ROS_BRIDGE_URL = 'ws://localhost:9090'
-
 class Sender {
     constructor(){
-        this.ros = new ROSLIB.Ros({
-            // in order to use it in your phone
-            // url : 'ws://192.168.1.109:9090'
-            url : ROS_BRIDGE_URL
-        });
+        fetch('/local_ip').then(res=>res.text()).then(ip=>{
+            const ROS_BRIDGE_URL = `ws://${ip}:9090`;
+            
+            this.ros = new ROSLIB.Ros({
+                url : ROS_BRIDGE_URL
+            });
+            
+            this.ros.on('connection', function() {
+                console.log('Connected to websocket server.');
+            });
         
-        this.ros.on('connection', function() {
-            console.log('Connected to websocket server.');
-        });
+            this.ros.on('error', function(error) {
+                console.log('Error connecting to websocket server: ', error);
+            });
+        
+            this.ros.on('close', function() {
+                console.log('Connection to websocket server closed.');
+            });
     
-        this.ros.on('error', function(error) {
-            console.log('Error connecting to websocket server: ', error);
-        });
+            this.cmdTopic = new ROSLIB.Topic({
+                ros : this.ros,
+                name : '/cmd_vel',
+                messageType : 'geometry_msgs/Twist'
+              });
     
-        this.ros.on('close', function() {
-            console.log('Connection to websocket server closed.');
-        });
-
-        this.cmdTopic = new ROSLIB.Topic({
-            ros : this.ros,
-            name : '/cmd_vel',
-            messageType : 'geometry_msgs/Twist'
-          });
-
-        this.moveBaseClient = new ROSLIB.ActionClient({
-            ros : this.ros,
-            serverName : '/move_base',
-            actionName : 'move_base_msgs/MoveBaseAction'
-          });
-
-        this.pidLTopic = new ROSLIB.Topic({
-            ros: this.ros,
-            name: '/tunePID_L',
-            messageType: 'geometry_msgs/Vector3'
+            this.moveBaseClient = new ROSLIB.ActionClient({
+                ros : this.ros,
+                serverName : '/move_base',
+                actionName : 'move_base_msgs/MoveBaseAction'
+              });
+    
+            this.pidLTopic = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/tunePID_L',
+                messageType: 'geometry_msgs/Vector3'
+            })
+    
+            this.pidRTopic = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/tunePID_R',
+                messageType: 'geometry_msgs/Vector3'
+            })
+    
+            this.resetArduinoTopic = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/reset_arduino',
+                messageType: 'std_msgs/Bool'
+            })
+    
+            this.sayTopic = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/say',
+                messageType: 'std_msgs/String'
+            })
+    
+            this.sayTopic.subscribe(sentence => responsiveVoice.speak(sentence.data))
         })
-
-        this.pidRTopic = new ROSLIB.Topic({
-            ros: this.ros,
-            name: '/tunePID_R',
-            messageType: 'geometry_msgs/Vector3'
-        })
-
-        this.resetArduinoTopic = new ROSLIB.Topic({
-            ros: this.ros,
-            name: '/reset_arduino',
-            messageType: 'std_msgs/Bool'
-        })
-
-        this.sayTopic = new ROSLIB.Topic({
-            ros: this.ros,
-            name: '/say',
-            messageType: 'std_msgs/String'
-        })
-
-        this.sayTopic.subscribe(sentence => responsiveVoice.speak(sentence.data))
     }
 
     sendCmd(speed, angle){
