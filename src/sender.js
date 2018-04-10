@@ -105,7 +105,7 @@ class Sender {
         const q = Quaternion.fromEuler(angle, 0, 0, 'ZXY');
         const q_vec = q.toVector();
 
-        const goal = new ROSLIB.Goal({
+        this.goal = new ROSLIB.Goal({
             actionClient : this.moveBaseClient,
             goalMessage : {
                 target_pose : {
@@ -133,14 +133,18 @@ class Sender {
             }
           });
         
-          goal.on('result', function(result) {
+          this.goal.on('result', function(result) {
             responsiveVoice.speak("Congratulations! You reached your destination");
           });
         
-          goal.send();
+          this.goal.send();
     }
 
-    resetArduino(){
+    reset(){
+        if (typeof this.goal !== 'undefined') {
+            this.goal.cancel();
+        }
+        this.sendCmd(0, 0);
         this.resetArduinoTopic.publish(new ROSLIB.Message({
             data: true
         }))

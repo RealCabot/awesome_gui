@@ -29,15 +29,15 @@ class App extends Component {
       value: 'commander',
     };
     this.handleChange = this.handleChange.bind(this);
-    this.resetArduino = this.resetArduino.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   handleChange(event, value){
     this.setState({ value });
   };
 
-  resetArduino(){
-    sender.resetArduino();
+  reset(){
+    sender.reset();
   }
 
   render() {
@@ -57,7 +57,7 @@ class App extends Component {
         {value === 'commander' && <CommandCenter/>}
         {value === 'joystick' && <JoyWrapper/>}
         {value === 'destination' && <DestinationSelector/>}
-        <Button variant="fab" color="secondary" aria-label="reset" size='large' className={classes.reset} onClick={this.resetArduino}>
+        <Button variant="fab" color="secondary" aria-label="reset" size='large' className={classes.reset} onClick={this.reset}>
           Do not press
         </Button>
       </div>
