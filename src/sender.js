@@ -58,13 +58,18 @@ class Sender {
                 name: '/say',
                 messageType: 'std_msgs/String'
             })
+
+            this.locTopic = new ROSLIB.Topic({
+                ros: this.ros,
+                name: '/initialpose',
+                messageType: 'geometry_msgs/PoseWithCovarianceStamped'
+            })
     
             this.sayTopic.subscribe(sentence => responsiveVoice.speak(sentence.data))
         })
     }
 
     sendCmd(speed, angle){
-        console.log(speed)
         const twist = new ROSLIB.Message({
             linear : {
               x : speed,
@@ -149,7 +154,42 @@ class Sender {
         }))
     }
 
-    
+    resetLocation(x, y, theta){
+
+        var currentTime = new Date();
+        var secs = Math.floor(currentTime.getTime()/1000);
+        var nsecs = Math.round(1000000000*(currentTime.getTime()/1000-secs));
+
+        const q = Quaternion.fromEuler(theta, 0, 0, 'ZXY');
+        const q_vec = q.toVector();
+
+        const pose_msg = new ROSLIB.Message({
+            header: {
+                frame_id: "base_link",
+                stamp: {
+                    secs: secs,
+                    nsecs: nsecs
+                }
+            },
+            pose: {
+                pose: {
+                    position: {
+                        x: x,
+                        y: y,
+                        z: 0
+                    },
+                    orientation: {
+                        x: q_vec[1],
+                        y: q_vec[2],
+                        z: q_vec[3],
+                        w: q_vec[0]
+                    }
+                },
+                covariance: new Array(36).fill(0)
+            }
+        });
+        this.locTopic.publish(pose_msg)
+    }
 }
 
 const sender = new Sender();

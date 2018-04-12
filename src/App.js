@@ -4,12 +4,11 @@ import './App.css';
 import CommandCenter from './CommandCenter';
 import JoyWrapper from './JoyWrapper';
 import DestinationSelector from './DestinationSelector'
+import ResetButton from './ResetButton'
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';import ChatIcon from 'material-ui-icons/Chat';
 import OpenWithIcon from 'material-ui-icons/OpenWith';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
-import Button from 'material-ui/Button';
-import sender from './sender.js';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 const theme = createMuiTheme({
@@ -45,19 +44,14 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      value: 'commander',
+      value: 'commander'
     };
     this.handleChange = this.handleChange.bind(this);
-    this.reset = this.reset.bind(this);
   }
 
   handleChange(event, value){
     this.setState({ value });
   };
-
-  reset(){
-    sender.reset();
-  }
 
   render() {
     const { classes } = this.props;
@@ -77,9 +71,7 @@ class App extends Component {
           {value === 'commander' && <CommandCenter/>}
           {value === 'joystick' && <JoyWrapper/>}
           {value === 'destination' && <DestinationSelector/>}
-          <Button variant="fab" color="secondary" aria-label="reset" size='large' className={classes.reset} onClick={this.reset}>
-            Do not press
-          </Button>
+          <ResetButton/>
         </div>
       </MuiThemeProvider>
     );
