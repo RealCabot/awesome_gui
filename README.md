@@ -17,9 +17,7 @@ yarn
 #### If you just want to teleoping Cabot
 
 - Connect your laptop with Arduino on Cabot
-- Make sure laptop and remote control device are in the same network (Cabot or phone hotspot)
-- Run `ifconfig`, you should be able to see your ipv4 address
-- `vim src/sender.js`, change the `ROS_BRIDGE_URL` to the address you just got, don't forget the `:9090`
+- Make sure laptop and remote control device are in the same network ( I suggest `eduroam`, username is `{andrewid}@andrew.cmu.edu` and password is andrew password )
 - run `roslaunch localizer get_odom.launch` anywhere and run `yarn start` in this folder
 - Go to your remote control device, open the browser, in the address bar, enter the ip address:3000 as is shown in the `yarn start` window
 
