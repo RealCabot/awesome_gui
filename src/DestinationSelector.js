@@ -111,7 +111,7 @@ class DestinationSelector extends Component {
                 {this.state.destination}
                 </Typography>
                 <Paper elevation={4} className={classes.paper}>
-                    <JoyStick joyOptions={joyOptions} divStyle={this.state.divStyle} managerFn={this.managerFn} />
+                    <JoyStick joyOptions={joyOptions} containerStyle={this.state.divStyle} managerListener={this.managerFn} />
                 </Paper>
             </Grid>
         )

@@ -6,9 +6,9 @@ import JoyWrapper from './JoyWrapper';
 import DestinationSelector from './DestinationSelector'
 import ResetButton from './ResetButton'
 import AppBar from 'material-ui/AppBar';
-import Tabs, { Tab } from 'material-ui/Tabs';import ChatIcon from 'material-ui-icons/Chat';
-import OpenWithIcon from 'material-ui-icons/OpenWith';
-import LocationOnIcon from 'material-ui-icons/LocationOn';
+import Tabs, { Tab } from 'material-ui/Tabs';import ChatIcon from '@material-ui/icons/Chat';
+import OpenWithIcon from '@material-ui/icons/OpenWith';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 const theme = createMuiTheme({

@@ -23,7 +23,7 @@ const joyOptions = {
     color: 'white'
 }
 
-const divStyle = {
+const containerStyle = {
     position: 'relative',
     height: '350px',
     width: '100%',
@@ -35,10 +35,10 @@ const SPEED_LIMIT = 0.5;
 class JoyWrapper extends Component {
     constructor() {
         super();
-        this.managerFn = this.managerFn.bind(this);
+        this.managerListener = this.managerListener.bind(this);
     }
 
-    managerFn(manager) {
+    managerListener(manager) {
         manager.on('move', (e, stick) => {
             // Set the maximum force to be 2
             const speed = Math.min(stick.force, 4) / 4 * SPEED_LIMIT;
@@ -55,7 +55,7 @@ class JoyWrapper extends Component {
         return (
             <Grid item xs={12} sm={4} className={classes.root}>
                 <Paper elevation={4} className={classes.paper}>
-                    <JoyStick joyOptions={joyOptions} divStyle={divStyle} managerFn={this.managerFn} />
+                    <JoyStick joyOptions={joyOptions} containerStyle={containerStyle} managerListener={this.managerListener} />
                 </Paper>
             </Grid>
         )
