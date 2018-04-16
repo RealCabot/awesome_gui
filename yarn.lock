@@ -4903,6 +4903,10 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
+latest-createjs@^1.0.24:
+  version "1.0.24"
+  resolved "https://registry.yarnpkg.com/latest-createjs/-/latest-createjs-1.0.24.tgz#c4c837f5f4688978e89c2b17ad0e2b5dc5111b34"
+
 latest-version@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/latest-version/-/latest-version-3.1.0.tgz#a205383fea322b33b5ae3b18abee0dc2f356ee15"
@@ -6613,6 +6617,14 @@ react-jss@^8.1.0:
 react-lifecycles-compat@^1.0.2:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-1.1.4.tgz#fc005c72849b7ed364de20a0f64ff58ebdc2009a"
+
+react-nav2djs@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/react-nav2djs/-/react-nav2djs-0.0.3.tgz#d821135a448b9d83b7cce3730b4b964e6eb431d2"
+  dependencies:
+    eventemitter2 "^5.0.1"
+    latest-createjs "^1.0.24"
+    roslib "^0.20.0"
 
 react-popper@^0.8.0:
   version "0.8.3"

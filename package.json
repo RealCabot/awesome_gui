@@ -15,9 +15,10 @@
     "quaternion": "^2.0.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-joystick": "^1.0.3",
     "react-scripts": "1.0.14",
-    "roslib": "^0.20.0"
+    "roslib": "^0.20.0",
+    "react-joystick": "^1.0.3",
+    "react-nav2djs": "^0.0.3"
   },
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",

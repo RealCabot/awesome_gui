@@ -9,7 +9,10 @@ import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';import ChatIcon from '@material-ui/icons/Chat';
 import OpenWithIcon from '@material-ui/icons/OpenWith';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import NavigationIcon from '@material-ui/icons/Navigation';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import Nav2d from 'react-nav2djs';
+import sender from './sender';
 
 const theme = createMuiTheme({
   palette: {
@@ -65,12 +68,14 @@ class App extends Component {
                 <Tab label="Commander" value="commander" icon={<ChatIcon />} />
                 <Tab label="Joystick" value="joystick" icon={<OpenWithIcon />} />
                 <Tab label="Destination" value="destination" icon={<LocationOnIcon />} />
+                <Tab label="Map" value="map" icon={<NavigationIcon />} />
               </Tabs>
             </AppBar>
           </div>
           {value === 'commander' && <CommandCenter/>}
           {value === 'joystick' && <JoyWrapper/>}
           {value === 'destination' && <DestinationSelector/>}
+          {value === 'map' && <Nav2d ros={sender.ros}/>}
           <ResetButton/>
         </div>
       </MuiThemeProvider>
