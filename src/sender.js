@@ -114,7 +114,7 @@ class Sender {
             goalMessage : {
                 target_pose : {
                     header: {
-                        frame_id: "base_link",
+                        frame_id: "map",
                         stamp: {
                             secs: secs,
                             nsecs: nsecs
@@ -165,7 +165,7 @@ class Sender {
 
         const pose_msg = new ROSLIB.Message({
             header: {
-                frame_id: "base_link",
+                frame_id: "map",
                 stamp: {
                     secs: secs,
                     nsecs: nsecs
