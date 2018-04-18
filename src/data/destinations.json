@@ -1,9 +1,10 @@
 [
-    { "name": "4524 NSH Building, Cabot Lab", "coordinates": [0, 0] },
-    { "name": "4527 NSH Building", "coordinates": [2.18, 0.156] },
-    { "name": "4522 NSH Building, Dragan and Ashi's Room", "coordinates": [4.22, -0.8] },
-    { "name": "4519 NSH Building, Tatsuya's Room", "coordinates": [11, -0.9] },
-    { "name": "Random small fridge", "coordinates": [10, -3.7] },
-    { "name": "Back door to Personal Robotics Lab", "coordinates": [-2, -8] },
-    { "name": "Robo lounge", "coordinates": [-0.85, -22.9] }
+    { "name": "4524 NSH Building, Cabot Lab", "coordinates": [-0.275, 0.152] },
+    { "name": "Sarah's Office", "coordinates": [12.8, -27.8] },
+    { "name": "4519 NSH Building, Tatsuya's Room", "coordinates": [10.4, -0.09] },
+    { "name": "Random small fridge", "coordinates": [10.7, -3.62] },
+    { "name": "Back door to Personal Robotics Lab", "coordinates": [-0.838, -8.58] },
+    { "name": "R I Commons", "coordinates": [2.86, -23.1] },
+    { "name": "Front Desk", "coordinates": [-9.76, -27.7] },
+    { "name": "Kitchen", "coordinates": [-1.73, -28.8] }
 ]
